@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'comma equals float identifier integer lparen operator print rparen stringprogram : statement_liststatement_list : statement\n                      | statement_list statementstatement : assignment\n                 | expression\n                 | print_statementassignment : identifier equals expressionexpression : integer\n                  | float\n                  | string\n                  | identifier\n                  | expression operator expression\n                  | lparen expression rparenprint_statement : print expression_listexpression_list : expression\n                       | expression_list comma expression'
+_lr_signature = 'comma double_equals equals float identifier integer lparen operator print rparen stringprogram : statement_liststatement_list : statement\n                      | statement_list statementstatement : assignment\n                 | comparison\n                 | expression\n                 | print_statementassignment : identifier equals expressioncomparison : identifier double_equals expressionexpression : integer\n                  | float\n                  | string\n                  | identifier\n                  | expression operator expression\n                  | expression double_equals expression\n                  | lparen expression rparenprint_statement : print expression_listexpression_list : expression\n                       | expression_list comma expression'
     
-_lr_action_items = {'identifier':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,],[7,7,-2,-4,-5,-6,-11,-8,-9,-10,17,17,-3,17,17,-11,-14,-15,-12,-7,-13,17,-16,]),'integer':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,],[8,8,-2,-4,-5,-6,-11,-8,-9,-10,8,8,-3,8,8,-11,-14,-15,-12,-7,-13,8,-16,]),'float':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,],[9,9,-2,-4,-5,-6,-11,-8,-9,-10,9,9,-3,9,9,-11,-14,-15,-12,-7,-13,9,-16,]),'string':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,],[10,10,-2,-4,-5,-6,-11,-8,-9,-10,10,10,-3,10,10,-11,-14,-15,-12,-7,-13,10,-16,]),'lparen':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,],[11,11,-2,-4,-5,-6,-11,-8,-9,-10,11,11,-3,11,11,-11,-14,-15,-12,-7,-13,11,-16,]),'print':([0,2,3,4,5,6,7,8,9,10,13,17,18,19,20,21,22,24,],[12,12,-2,-4,-5,-6,-11,-8,-9,-10,-3,-11,-14,-15,-12,-7,-13,-16,]),'$end':([1,2,3,4,5,6,7,8,9,10,13,17,18,19,20,21,22,24,],[0,-1,-2,-4,-5,-6,-11,-8,-9,-10,-3,-11,-14,-15,-12,-7,-13,-16,]),'operator':([5,7,8,9,10,16,17,19,20,21,22,24,],[14,-11,-8,-9,-10,14,-11,14,14,14,-13,14,]),'equals':([7,],[15,]),'rparen':([8,9,10,16,17,20,22,],[-8,-9,-10,22,-11,-12,-13,]),'comma':([8,9,10,17,18,19,20,22,24,],[-8,-9,-10,-11,23,-15,-12,-13,-16,]),}
+_lr_action_items = {'identifier':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21,22,23,24,25,26,27,28,29,],[8,8,-2,-4,-5,-6,-7,-13,-10,-11,-12,20,20,-3,20,20,20,20,-13,-17,-18,-14,-15,-8,-9,-16,20,-19,]),'integer':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21,22,23,24,25,26,27,28,29,],[9,9,-2,-4,-5,-6,-7,-13,-10,-11,-12,9,9,-3,9,9,9,9,-13,-17,-18,-14,-15,-8,-9,-16,9,-19,]),'float':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21,22,23,24,25,26,27,28,29,],[10,10,-2,-4,-5,-6,-7,-13,-10,-11,-12,10,10,-3,10,10,10,10,-13,-17,-18,-14,-15,-8,-9,-16,10,-19,]),'string':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21,22,23,24,25,26,27,28,29,],[11,11,-2,-4,-5,-6,-7,-13,-10,-11,-12,11,11,-3,11,11,11,11,-13,-17,-18,-14,-15,-8,-9,-16,11,-19,]),'lparen':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21,22,23,24,25,26,27,28,29,],[12,12,-2,-4,-5,-6,-7,-13,-10,-11,-12,12,12,-3,12,12,12,12,-13,-17,-18,-14,-15,-8,-9,-16,12,-19,]),'print':([0,2,3,4,5,6,7,8,9,10,11,14,20,21,22,23,24,25,26,27,29,],[13,13,-2,-4,-5,-6,-7,-13,-10,-11,-12,-3,-13,-17,-18,-14,-15,-8,-9,-16,-19,]),'$end':([1,2,3,4,5,6,7,8,9,10,11,14,20,21,22,23,24,25,26,27,29,],[0,-1,-2,-4,-5,-6,-7,-13,-10,-11,-12,-3,-13,-17,-18,-14,-15,-8,-9,-16,-19,]),'operator':([6,8,9,10,11,19,20,22,23,24,25,26,27,29,],[15,-13,-10,-11,-12,15,-13,15,15,15,15,15,-16,15,]),'double_equals':([6,8,9,10,11,19,20,22,23,24,25,26,27,29,],[16,18,-10,-11,-12,16,-13,16,16,16,16,16,-16,16,]),'equals':([8,],[17,]),'rparen':([9,10,11,19,20,23,24,27,],[-10,-11,-12,27,-13,-14,-15,-16,]),'comma':([9,10,11,20,21,22,23,24,27,29,],[-10,-11,-12,-13,28,-18,-14,-15,-16,-19,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,],[2,]),'statement':([0,2,],[3,13,]),'assignment':([0,2,],[4,4,]),'expression':([0,2,11,12,14,15,23,],[5,5,16,19,20,21,24,]),'print_statement':([0,2,],[6,6,]),'expression_list':([12,],[18,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statement_list':([0,],[2,]),'statement':([0,2,],[3,14,]),'assignment':([0,2,],[4,4,]),'comparison':([0,2,],[5,5,]),'expression':([0,2,12,13,15,16,17,18,28,],[6,6,19,22,23,24,25,26,29,]),'print_statement':([0,2,],[7,7,]),'expression_list':([13,],[21,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,20 +27,23 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> statement_list','program',1,'p_program','main.py',61),
-  ('statement_list -> statement','statement_list',1,'p_statement_list','main.py',66),
-  ('statement_list -> statement_list statement','statement_list',2,'p_statement_list','main.py',67),
-  ('statement -> assignment','statement',1,'p_statement','main.py',75),
-  ('statement -> expression','statement',1,'p_statement','main.py',76),
-  ('statement -> print_statement','statement',1,'p_statement','main.py',77),
-  ('assignment -> identifier equals expression','assignment',3,'p_assignment','main.py',82),
-  ('expression -> integer','expression',1,'p_expression','main.py',87),
-  ('expression -> float','expression',1,'p_expression','main.py',88),
-  ('expression -> string','expression',1,'p_expression','main.py',89),
-  ('expression -> identifier','expression',1,'p_expression','main.py',90),
-  ('expression -> expression operator expression','expression',3,'p_expression','main.py',91),
-  ('expression -> lparen expression rparen','expression',3,'p_expression','main.py',92),
-  ('print_statement -> print expression_list','print_statement',2,'p_print_statement','main.py',102),
-  ('expression_list -> expression','expression_list',1,'p_expression_list','main.py',107),
-  ('expression_list -> expression_list comma expression','expression_list',3,'p_expression_list','main.py',108),
+  ('program -> statement_list','program',1,'p_program','main.py',63),
+  ('statement_list -> statement','statement_list',1,'p_statement_list','main.py',68),
+  ('statement_list -> statement_list statement','statement_list',2,'p_statement_list','main.py',69),
+  ('statement -> assignment','statement',1,'p_statement','main.py',77),
+  ('statement -> comparison','statement',1,'p_statement','main.py',78),
+  ('statement -> expression','statement',1,'p_statement','main.py',79),
+  ('statement -> print_statement','statement',1,'p_statement','main.py',80),
+  ('assignment -> identifier equals expression','assignment',3,'p_assignment','main.py',85),
+  ('comparison -> identifier double_equals expression','comparison',3,'p_comparison','main.py',90),
+  ('expression -> integer','expression',1,'p_expression','main.py',95),
+  ('expression -> float','expression',1,'p_expression','main.py',96),
+  ('expression -> string','expression',1,'p_expression','main.py',97),
+  ('expression -> identifier','expression',1,'p_expression','main.py',98),
+  ('expression -> expression operator expression','expression',3,'p_expression','main.py',99),
+  ('expression -> expression double_equals expression','expression',3,'p_expression','main.py',100),
+  ('expression -> lparen expression rparen','expression',3,'p_expression','main.py',101),
+  ('print_statement -> print expression_list','print_statement',2,'p_print_statement','main.py',111),
+  ('expression_list -> expression','expression_list',1,'p_expression_list','main.py',116),
+  ('expression_list -> expression_list comma expression','expression_list',3,'p_expression_list','main.py',117),
 ]

@@ -12,10 +12,12 @@ tokens = (
     'rparen',
     'comma',
     'equals',
+    'double_equals',
 )
 
 # Define regular expressions for lexer tokens
-t_operator = r'[-+*/%=<>&|^~]'
+t_double_equals = r'=='
+t_operator = r'[-+*/%<>&|^~]'
 t_print = r'print'
 t_lparen = r'\('
 t_rparen = r'\)'
@@ -73,6 +75,7 @@ def p_statement_list(p):
 
 def p_statement(p):
     """statement : assignment
+                 | comparison
                  | expression
                  | print_statement"""
     p[0] = p[1]
@@ -83,12 +86,18 @@ def p_assignment(p):
     p[0] = ('assignment', p[1], p[3])
 
 
+def p_comparison(p):
+    """comparison : identifier double_equals expression"""
+    p[0] = ('comparison', (p[1], p[3]))
+
+
 def p_expression(p):
     """expression : integer
                   | float
                   | string
                   | identifier
                   | expression operator expression
+                  | expression double_equals expression
                   | lparen expression rparen"""
     if len(p) == 2:
         p[0] = p[1]
@@ -189,11 +198,12 @@ def tokenize(code):
 
 if __name__ == "__main__":
     code = """
-    variable1 = 1.5
+      if 1 == 2
     """
-    tokens = tokenize(code)
-    print("Tokens:", tokens)
+    if code.strip():
+        tokens = tokenize(code)
+        print("Tokens:", tokens)
 
-    parsed_code = parse(code)
-    if parsed_code:
-        print("Parsed code:", parsed_code)
+        parsed_code = parse(code)
+        if parsed_code:
+            print("Parsed code:", parsed_code)

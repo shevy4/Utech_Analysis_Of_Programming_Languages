@@ -9,34 +9,36 @@ Rule 3     statement_list -> statement_list statement
 Rule 4     statement -> assignment
 Rule 5     statement -> expression
 Rule 6     statement -> print_statement
-Rule 7     assignment -> IDENTIFIER EQUALS expression
-Rule 8     expression -> NUMBER
-Rule 9     expression -> STRING
-Rule 10    expression -> IDENTIFIER
-Rule 11    expression -> expression OPERATOR expression
-Rule 12    expression -> LPAREN expression RPAREN
-Rule 13    print_statement -> PRINT expression_list
-Rule 14    expression_list -> expression
-Rule 15    expression_list -> expression_list COMMA expression
+Rule 7     assignment -> identifier equals expression
+Rule 8     expression -> integer
+Rule 9     expression -> float
+Rule 10    expression -> string
+Rule 11    expression -> identifier
+Rule 12    expression -> expression operator expression
+Rule 13    expression -> lparen expression rparen
+Rule 14    print_statement -> print expression_list
+Rule 15    expression_list -> expression
+Rule 16    expression_list -> expression_list comma expression
 
 Terminals, with rules where they appear
 
-COMMA                : 15
-EQUALS               : 7
-IDENTIFIER           : 7 10
-LPAREN               : 12
-NUMBER               : 8
-OPERATOR             : 11
-PRINT                : 13
-RPAREN               : 12
-STRING               : 9
+comma                : 16
+equals               : 7
 error                : 
+float                : 9
+identifier           : 7 11
+integer              : 8
+lparen               : 13
+operator             : 12
+print                : 14
+rparen               : 13
+string               : 10
 
 Nonterminals, with rules where they appear
 
 assignment           : 4
-expression           : 5 7 11 11 12 14 15
-expression_list      : 13 15
+expression           : 5 7 12 12 13 15 16
+expression_list      : 14 16
 print_statement      : 6
 program              : 0
 statement            : 2 3
@@ -53,19 +55,21 @@ state 0
     (4) statement -> . assignment
     (5) statement -> . expression
     (6) statement -> . print_statement
-    (7) assignment -> . IDENTIFIER EQUALS expression
-    (8) expression -> . NUMBER
-    (9) expression -> . STRING
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . expression OPERATOR expression
-    (12) expression -> . LPAREN expression RPAREN
-    (13) print_statement -> . PRINT expression_list
+    (7) assignment -> . identifier equals expression
+    (8) expression -> . integer
+    (9) expression -> . float
+    (10) expression -> . string
+    (11) expression -> . identifier
+    (12) expression -> . expression operator expression
+    (13) expression -> . lparen expression rparen
+    (14) print_statement -> . print expression_list
 
-    IDENTIFIER      shift and go to state 7
-    NUMBER          shift and go to state 8
-    STRING          shift and go to state 9
-    LPAREN          shift and go to state 10
-    PRINT           shift and go to state 11
+    identifier      shift and go to state 7
+    integer         shift and go to state 8
+    float           shift and go to state 9
+    string          shift and go to state 10
+    lparen          shift and go to state 11
+    print           shift and go to state 12
 
     program                        shift and go to state 1
     statement_list                 shift and go to state 2
@@ -87,22 +91,24 @@ state 2
     (4) statement -> . assignment
     (5) statement -> . expression
     (6) statement -> . print_statement
-    (7) assignment -> . IDENTIFIER EQUALS expression
-    (8) expression -> . NUMBER
-    (9) expression -> . STRING
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . expression OPERATOR expression
-    (12) expression -> . LPAREN expression RPAREN
-    (13) print_statement -> . PRINT expression_list
+    (7) assignment -> . identifier equals expression
+    (8) expression -> . integer
+    (9) expression -> . float
+    (10) expression -> . string
+    (11) expression -> . identifier
+    (12) expression -> . expression operator expression
+    (13) expression -> . lparen expression rparen
+    (14) print_statement -> . print expression_list
 
     $end            reduce using rule 1 (program -> statement_list .)
-    IDENTIFIER      shift and go to state 7
-    NUMBER          shift and go to state 8
-    STRING          shift and go to state 9
-    LPAREN          shift and go to state 10
-    PRINT           shift and go to state 11
+    identifier      shift and go to state 7
+    integer         shift and go to state 8
+    float           shift and go to state 9
+    string          shift and go to state 10
+    lparen          shift and go to state 11
+    print           shift and go to state 12
 
-    statement                      shift and go to state 12
+    statement                      shift and go to state 13
     assignment                     shift and go to state 4
     expression                     shift and go to state 5
     print_statement                shift and go to state 6
@@ -111,11 +117,12 @@ state 3
 
     (2) statement_list -> statement .
 
-    IDENTIFIER      reduce using rule 2 (statement_list -> statement .)
-    NUMBER          reduce using rule 2 (statement_list -> statement .)
-    STRING          reduce using rule 2 (statement_list -> statement .)
-    LPAREN          reduce using rule 2 (statement_list -> statement .)
-    PRINT           reduce using rule 2 (statement_list -> statement .)
+    identifier      reduce using rule 2 (statement_list -> statement .)
+    integer         reduce using rule 2 (statement_list -> statement .)
+    float           reduce using rule 2 (statement_list -> statement .)
+    string          reduce using rule 2 (statement_list -> statement .)
+    lparen          reduce using rule 2 (statement_list -> statement .)
+    print           reduce using rule 2 (statement_list -> statement .)
     $end            reduce using rule 2 (statement_list -> statement .)
 
 
@@ -123,296 +130,336 @@ state 4
 
     (4) statement -> assignment .
 
-    IDENTIFIER      reduce using rule 4 (statement -> assignment .)
-    NUMBER          reduce using rule 4 (statement -> assignment .)
-    STRING          reduce using rule 4 (statement -> assignment .)
-    LPAREN          reduce using rule 4 (statement -> assignment .)
-    PRINT           reduce using rule 4 (statement -> assignment .)
+    identifier      reduce using rule 4 (statement -> assignment .)
+    integer         reduce using rule 4 (statement -> assignment .)
+    float           reduce using rule 4 (statement -> assignment .)
+    string          reduce using rule 4 (statement -> assignment .)
+    lparen          reduce using rule 4 (statement -> assignment .)
+    print           reduce using rule 4 (statement -> assignment .)
     $end            reduce using rule 4 (statement -> assignment .)
 
 
 state 5
 
     (5) statement -> expression .
-    (11) expression -> expression . OPERATOR expression
+    (12) expression -> expression . operator expression
 
-    IDENTIFIER      reduce using rule 5 (statement -> expression .)
-    NUMBER          reduce using rule 5 (statement -> expression .)
-    STRING          reduce using rule 5 (statement -> expression .)
-    LPAREN          reduce using rule 5 (statement -> expression .)
-    PRINT           reduce using rule 5 (statement -> expression .)
+    identifier      reduce using rule 5 (statement -> expression .)
+    integer         reduce using rule 5 (statement -> expression .)
+    float           reduce using rule 5 (statement -> expression .)
+    string          reduce using rule 5 (statement -> expression .)
+    lparen          reduce using rule 5 (statement -> expression .)
+    print           reduce using rule 5 (statement -> expression .)
     $end            reduce using rule 5 (statement -> expression .)
-    OPERATOR        shift and go to state 13
+    operator        shift and go to state 14
 
 
 state 6
 
     (6) statement -> print_statement .
 
-    IDENTIFIER      reduce using rule 6 (statement -> print_statement .)
-    NUMBER          reduce using rule 6 (statement -> print_statement .)
-    STRING          reduce using rule 6 (statement -> print_statement .)
-    LPAREN          reduce using rule 6 (statement -> print_statement .)
-    PRINT           reduce using rule 6 (statement -> print_statement .)
+    identifier      reduce using rule 6 (statement -> print_statement .)
+    integer         reduce using rule 6 (statement -> print_statement .)
+    float           reduce using rule 6 (statement -> print_statement .)
+    string          reduce using rule 6 (statement -> print_statement .)
+    lparen          reduce using rule 6 (statement -> print_statement .)
+    print           reduce using rule 6 (statement -> print_statement .)
     $end            reduce using rule 6 (statement -> print_statement .)
 
 
 state 7
 
-    (7) assignment -> IDENTIFIER . EQUALS expression
-    (10) expression -> IDENTIFIER .
+    (7) assignment -> identifier . equals expression
+    (11) expression -> identifier .
 
-    EQUALS          shift and go to state 14
-    OPERATOR        reduce using rule 10 (expression -> IDENTIFIER .)
-    IDENTIFIER      reduce using rule 10 (expression -> IDENTIFIER .)
-    NUMBER          reduce using rule 10 (expression -> IDENTIFIER .)
-    STRING          reduce using rule 10 (expression -> IDENTIFIER .)
-    LPAREN          reduce using rule 10 (expression -> IDENTIFIER .)
-    PRINT           reduce using rule 10 (expression -> IDENTIFIER .)
-    $end            reduce using rule 10 (expression -> IDENTIFIER .)
+    equals          shift and go to state 15
+    operator        reduce using rule 11 (expression -> identifier .)
+    identifier      reduce using rule 11 (expression -> identifier .)
+    integer         reduce using rule 11 (expression -> identifier .)
+    float           reduce using rule 11 (expression -> identifier .)
+    string          reduce using rule 11 (expression -> identifier .)
+    lparen          reduce using rule 11 (expression -> identifier .)
+    print           reduce using rule 11 (expression -> identifier .)
+    $end            reduce using rule 11 (expression -> identifier .)
 
 
 state 8
 
-    (8) expression -> NUMBER .
+    (8) expression -> integer .
 
-    OPERATOR        reduce using rule 8 (expression -> NUMBER .)
-    IDENTIFIER      reduce using rule 8 (expression -> NUMBER .)
-    NUMBER          reduce using rule 8 (expression -> NUMBER .)
-    STRING          reduce using rule 8 (expression -> NUMBER .)
-    LPAREN          reduce using rule 8 (expression -> NUMBER .)
-    PRINT           reduce using rule 8 (expression -> NUMBER .)
-    $end            reduce using rule 8 (expression -> NUMBER .)
-    RPAREN          reduce using rule 8 (expression -> NUMBER .)
-    COMMA           reduce using rule 8 (expression -> NUMBER .)
+    operator        reduce using rule 8 (expression -> integer .)
+    identifier      reduce using rule 8 (expression -> integer .)
+    integer         reduce using rule 8 (expression -> integer .)
+    float           reduce using rule 8 (expression -> integer .)
+    string          reduce using rule 8 (expression -> integer .)
+    lparen          reduce using rule 8 (expression -> integer .)
+    print           reduce using rule 8 (expression -> integer .)
+    $end            reduce using rule 8 (expression -> integer .)
+    rparen          reduce using rule 8 (expression -> integer .)
+    comma           reduce using rule 8 (expression -> integer .)
 
 
 state 9
 
-    (9) expression -> STRING .
+    (9) expression -> float .
 
-    OPERATOR        reduce using rule 9 (expression -> STRING .)
-    IDENTIFIER      reduce using rule 9 (expression -> STRING .)
-    NUMBER          reduce using rule 9 (expression -> STRING .)
-    STRING          reduce using rule 9 (expression -> STRING .)
-    LPAREN          reduce using rule 9 (expression -> STRING .)
-    PRINT           reduce using rule 9 (expression -> STRING .)
-    $end            reduce using rule 9 (expression -> STRING .)
-    RPAREN          reduce using rule 9 (expression -> STRING .)
-    COMMA           reduce using rule 9 (expression -> STRING .)
+    operator        reduce using rule 9 (expression -> float .)
+    identifier      reduce using rule 9 (expression -> float .)
+    integer         reduce using rule 9 (expression -> float .)
+    float           reduce using rule 9 (expression -> float .)
+    string          reduce using rule 9 (expression -> float .)
+    lparen          reduce using rule 9 (expression -> float .)
+    print           reduce using rule 9 (expression -> float .)
+    $end            reduce using rule 9 (expression -> float .)
+    rparen          reduce using rule 9 (expression -> float .)
+    comma           reduce using rule 9 (expression -> float .)
 
 
 state 10
 
-    (12) expression -> LPAREN . expression RPAREN
-    (8) expression -> . NUMBER
-    (9) expression -> . STRING
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . expression OPERATOR expression
-    (12) expression -> . LPAREN expression RPAREN
+    (10) expression -> string .
 
-    NUMBER          shift and go to state 8
-    STRING          shift and go to state 9
-    IDENTIFIER      shift and go to state 16
-    LPAREN          shift and go to state 10
+    operator        reduce using rule 10 (expression -> string .)
+    identifier      reduce using rule 10 (expression -> string .)
+    integer         reduce using rule 10 (expression -> string .)
+    float           reduce using rule 10 (expression -> string .)
+    string          reduce using rule 10 (expression -> string .)
+    lparen          reduce using rule 10 (expression -> string .)
+    print           reduce using rule 10 (expression -> string .)
+    $end            reduce using rule 10 (expression -> string .)
+    rparen          reduce using rule 10 (expression -> string .)
+    comma           reduce using rule 10 (expression -> string .)
 
-    expression                     shift and go to state 15
 
 state 11
 
-    (13) print_statement -> PRINT . expression_list
-    (14) expression_list -> . expression
-    (15) expression_list -> . expression_list COMMA expression
-    (8) expression -> . NUMBER
-    (9) expression -> . STRING
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . expression OPERATOR expression
-    (12) expression -> . LPAREN expression RPAREN
+    (13) expression -> lparen . expression rparen
+    (8) expression -> . integer
+    (9) expression -> . float
+    (10) expression -> . string
+    (11) expression -> . identifier
+    (12) expression -> . expression operator expression
+    (13) expression -> . lparen expression rparen
 
-    NUMBER          shift and go to state 8
-    STRING          shift and go to state 9
-    IDENTIFIER      shift and go to state 16
-    LPAREN          shift and go to state 10
+    integer         shift and go to state 8
+    float           shift and go to state 9
+    string          shift and go to state 10
+    identifier      shift and go to state 17
+    lparen          shift and go to state 11
 
-    expression_list                shift and go to state 17
-    expression                     shift and go to state 18
+    expression                     shift and go to state 16
 
 state 12
 
-    (3) statement_list -> statement_list statement .
+    (14) print_statement -> print . expression_list
+    (15) expression_list -> . expression
+    (16) expression_list -> . expression_list comma expression
+    (8) expression -> . integer
+    (9) expression -> . float
+    (10) expression -> . string
+    (11) expression -> . identifier
+    (12) expression -> . expression operator expression
+    (13) expression -> . lparen expression rparen
 
-    IDENTIFIER      reduce using rule 3 (statement_list -> statement_list statement .)
-    NUMBER          reduce using rule 3 (statement_list -> statement_list statement .)
-    STRING          reduce using rule 3 (statement_list -> statement_list statement .)
-    LPAREN          reduce using rule 3 (statement_list -> statement_list statement .)
-    PRINT           reduce using rule 3 (statement_list -> statement_list statement .)
-    $end            reduce using rule 3 (statement_list -> statement_list statement .)
+    integer         shift and go to state 8
+    float           shift and go to state 9
+    string          shift and go to state 10
+    identifier      shift and go to state 17
+    lparen          shift and go to state 11
 
+    expression_list                shift and go to state 18
+    expression                     shift and go to state 19
 
 state 13
 
-    (11) expression -> expression OPERATOR . expression
-    (8) expression -> . NUMBER
-    (9) expression -> . STRING
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . expression OPERATOR expression
-    (12) expression -> . LPAREN expression RPAREN
+    (3) statement_list -> statement_list statement .
 
-    NUMBER          shift and go to state 8
-    STRING          shift and go to state 9
-    IDENTIFIER      shift and go to state 16
-    LPAREN          shift and go to state 10
+    identifier      reduce using rule 3 (statement_list -> statement_list statement .)
+    integer         reduce using rule 3 (statement_list -> statement_list statement .)
+    float           reduce using rule 3 (statement_list -> statement_list statement .)
+    string          reduce using rule 3 (statement_list -> statement_list statement .)
+    lparen          reduce using rule 3 (statement_list -> statement_list statement .)
+    print           reduce using rule 3 (statement_list -> statement_list statement .)
+    $end            reduce using rule 3 (statement_list -> statement_list statement .)
 
-    expression                     shift and go to state 19
 
 state 14
 
-    (7) assignment -> IDENTIFIER EQUALS . expression
-    (8) expression -> . NUMBER
-    (9) expression -> . STRING
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . expression OPERATOR expression
-    (12) expression -> . LPAREN expression RPAREN
+    (12) expression -> expression operator . expression
+    (8) expression -> . integer
+    (9) expression -> . float
+    (10) expression -> . string
+    (11) expression -> . identifier
+    (12) expression -> . expression operator expression
+    (13) expression -> . lparen expression rparen
 
-    NUMBER          shift and go to state 8
-    STRING          shift and go to state 9
-    IDENTIFIER      shift and go to state 16
-    LPAREN          shift and go to state 10
+    integer         shift and go to state 8
+    float           shift and go to state 9
+    string          shift and go to state 10
+    identifier      shift and go to state 17
+    lparen          shift and go to state 11
 
     expression                     shift and go to state 20
 
 state 15
 
-    (12) expression -> LPAREN expression . RPAREN
-    (11) expression -> expression . OPERATOR expression
+    (7) assignment -> identifier equals . expression
+    (8) expression -> . integer
+    (9) expression -> . float
+    (10) expression -> . string
+    (11) expression -> . identifier
+    (12) expression -> . expression operator expression
+    (13) expression -> . lparen expression rparen
 
-    RPAREN          shift and go to state 21
-    OPERATOR        shift and go to state 13
+    integer         shift and go to state 8
+    float           shift and go to state 9
+    string          shift and go to state 10
+    identifier      shift and go to state 17
+    lparen          shift and go to state 11
 
+    expression                     shift and go to state 21
 
 state 16
 
-    (10) expression -> IDENTIFIER .
+    (13) expression -> lparen expression . rparen
+    (12) expression -> expression . operator expression
 
-    RPAREN          reduce using rule 10 (expression -> IDENTIFIER .)
-    OPERATOR        reduce using rule 10 (expression -> IDENTIFIER .)
-    COMMA           reduce using rule 10 (expression -> IDENTIFIER .)
-    IDENTIFIER      reduce using rule 10 (expression -> IDENTIFIER .)
-    NUMBER          reduce using rule 10 (expression -> IDENTIFIER .)
-    STRING          reduce using rule 10 (expression -> IDENTIFIER .)
-    LPAREN          reduce using rule 10 (expression -> IDENTIFIER .)
-    PRINT           reduce using rule 10 (expression -> IDENTIFIER .)
-    $end            reduce using rule 10 (expression -> IDENTIFIER .)
+    rparen          shift and go to state 22
+    operator        shift and go to state 14
 
 
 state 17
 
-    (13) print_statement -> PRINT expression_list .
-    (15) expression_list -> expression_list . COMMA expression
+    (11) expression -> identifier .
 
-    IDENTIFIER      reduce using rule 13 (print_statement -> PRINT expression_list .)
-    NUMBER          reduce using rule 13 (print_statement -> PRINT expression_list .)
-    STRING          reduce using rule 13 (print_statement -> PRINT expression_list .)
-    LPAREN          reduce using rule 13 (print_statement -> PRINT expression_list .)
-    PRINT           reduce using rule 13 (print_statement -> PRINT expression_list .)
-    $end            reduce using rule 13 (print_statement -> PRINT expression_list .)
-    COMMA           shift and go to state 22
+    rparen          reduce using rule 11 (expression -> identifier .)
+    operator        reduce using rule 11 (expression -> identifier .)
+    comma           reduce using rule 11 (expression -> identifier .)
+    identifier      reduce using rule 11 (expression -> identifier .)
+    integer         reduce using rule 11 (expression -> identifier .)
+    float           reduce using rule 11 (expression -> identifier .)
+    string          reduce using rule 11 (expression -> identifier .)
+    lparen          reduce using rule 11 (expression -> identifier .)
+    print           reduce using rule 11 (expression -> identifier .)
+    $end            reduce using rule 11 (expression -> identifier .)
 
 
 state 18
 
-    (14) expression_list -> expression .
-    (11) expression -> expression . OPERATOR expression
+    (14) print_statement -> print expression_list .
+    (16) expression_list -> expression_list . comma expression
 
-    COMMA           reduce using rule 14 (expression_list -> expression .)
-    IDENTIFIER      reduce using rule 14 (expression_list -> expression .)
-    NUMBER          reduce using rule 14 (expression_list -> expression .)
-    STRING          reduce using rule 14 (expression_list -> expression .)
-    LPAREN          reduce using rule 14 (expression_list -> expression .)
-    PRINT           reduce using rule 14 (expression_list -> expression .)
-    $end            reduce using rule 14 (expression_list -> expression .)
-    OPERATOR        shift and go to state 13
+    identifier      reduce using rule 14 (print_statement -> print expression_list .)
+    integer         reduce using rule 14 (print_statement -> print expression_list .)
+    float           reduce using rule 14 (print_statement -> print expression_list .)
+    string          reduce using rule 14 (print_statement -> print expression_list .)
+    lparen          reduce using rule 14 (print_statement -> print expression_list .)
+    print           reduce using rule 14 (print_statement -> print expression_list .)
+    $end            reduce using rule 14 (print_statement -> print expression_list .)
+    comma           shift and go to state 23
 
 
 state 19
 
-    (11) expression -> expression OPERATOR expression .
-    (11) expression -> expression . OPERATOR expression
+    (15) expression_list -> expression .
+    (12) expression -> expression . operator expression
 
-  ! shift/reduce conflict for OPERATOR resolved as shift
-    IDENTIFIER      reduce using rule 11 (expression -> expression OPERATOR expression .)
-    NUMBER          reduce using rule 11 (expression -> expression OPERATOR expression .)
-    STRING          reduce using rule 11 (expression -> expression OPERATOR expression .)
-    LPAREN          reduce using rule 11 (expression -> expression OPERATOR expression .)
-    PRINT           reduce using rule 11 (expression -> expression OPERATOR expression .)
-    $end            reduce using rule 11 (expression -> expression OPERATOR expression .)
-    RPAREN          reduce using rule 11 (expression -> expression OPERATOR expression .)
-    COMMA           reduce using rule 11 (expression -> expression OPERATOR expression .)
-    OPERATOR        shift and go to state 13
-
-  ! OPERATOR        [ reduce using rule 11 (expression -> expression OPERATOR expression .) ]
+    comma           reduce using rule 15 (expression_list -> expression .)
+    identifier      reduce using rule 15 (expression_list -> expression .)
+    integer         reduce using rule 15 (expression_list -> expression .)
+    float           reduce using rule 15 (expression_list -> expression .)
+    string          reduce using rule 15 (expression_list -> expression .)
+    lparen          reduce using rule 15 (expression_list -> expression .)
+    print           reduce using rule 15 (expression_list -> expression .)
+    $end            reduce using rule 15 (expression_list -> expression .)
+    operator        shift and go to state 14
 
 
 state 20
 
-    (7) assignment -> IDENTIFIER EQUALS expression .
-    (11) expression -> expression . OPERATOR expression
+    (12) expression -> expression operator expression .
+    (12) expression -> expression . operator expression
 
-    IDENTIFIER      reduce using rule 7 (assignment -> IDENTIFIER EQUALS expression .)
-    NUMBER          reduce using rule 7 (assignment -> IDENTIFIER EQUALS expression .)
-    STRING          reduce using rule 7 (assignment -> IDENTIFIER EQUALS expression .)
-    LPAREN          reduce using rule 7 (assignment -> IDENTIFIER EQUALS expression .)
-    PRINT           reduce using rule 7 (assignment -> IDENTIFIER EQUALS expression .)
-    $end            reduce using rule 7 (assignment -> IDENTIFIER EQUALS expression .)
-    OPERATOR        shift and go to state 13
+  ! shift/reduce conflict for operator resolved as shift
+    identifier      reduce using rule 12 (expression -> expression operator expression .)
+    integer         reduce using rule 12 (expression -> expression operator expression .)
+    float           reduce using rule 12 (expression -> expression operator expression .)
+    string          reduce using rule 12 (expression -> expression operator expression .)
+    lparen          reduce using rule 12 (expression -> expression operator expression .)
+    print           reduce using rule 12 (expression -> expression operator expression .)
+    $end            reduce using rule 12 (expression -> expression operator expression .)
+    rparen          reduce using rule 12 (expression -> expression operator expression .)
+    comma           reduce using rule 12 (expression -> expression operator expression .)
+    operator        shift and go to state 14
+
+  ! operator        [ reduce using rule 12 (expression -> expression operator expression .) ]
 
 
 state 21
 
-    (12) expression -> LPAREN expression RPAREN .
+    (7) assignment -> identifier equals expression .
+    (12) expression -> expression . operator expression
 
-    OPERATOR        reduce using rule 12 (expression -> LPAREN expression RPAREN .)
-    IDENTIFIER      reduce using rule 12 (expression -> LPAREN expression RPAREN .)
-    NUMBER          reduce using rule 12 (expression -> LPAREN expression RPAREN .)
-    STRING          reduce using rule 12 (expression -> LPAREN expression RPAREN .)
-    LPAREN          reduce using rule 12 (expression -> LPAREN expression RPAREN .)
-    PRINT           reduce using rule 12 (expression -> LPAREN expression RPAREN .)
-    $end            reduce using rule 12 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 12 (expression -> LPAREN expression RPAREN .)
-    COMMA           reduce using rule 12 (expression -> LPAREN expression RPAREN .)
+    identifier      reduce using rule 7 (assignment -> identifier equals expression .)
+    integer         reduce using rule 7 (assignment -> identifier equals expression .)
+    float           reduce using rule 7 (assignment -> identifier equals expression .)
+    string          reduce using rule 7 (assignment -> identifier equals expression .)
+    lparen          reduce using rule 7 (assignment -> identifier equals expression .)
+    print           reduce using rule 7 (assignment -> identifier equals expression .)
+    $end            reduce using rule 7 (assignment -> identifier equals expression .)
+    operator        shift and go to state 14
 
 
 state 22
 
-    (15) expression_list -> expression_list COMMA . expression
-    (8) expression -> . NUMBER
-    (9) expression -> . STRING
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . expression OPERATOR expression
-    (12) expression -> . LPAREN expression RPAREN
+    (13) expression -> lparen expression rparen .
 
-    NUMBER          shift and go to state 8
-    STRING          shift and go to state 9
-    IDENTIFIER      shift and go to state 16
-    LPAREN          shift and go to state 10
+    operator        reduce using rule 13 (expression -> lparen expression rparen .)
+    identifier      reduce using rule 13 (expression -> lparen expression rparen .)
+    integer         reduce using rule 13 (expression -> lparen expression rparen .)
+    float           reduce using rule 13 (expression -> lparen expression rparen .)
+    string          reduce using rule 13 (expression -> lparen expression rparen .)
+    lparen          reduce using rule 13 (expression -> lparen expression rparen .)
+    print           reduce using rule 13 (expression -> lparen expression rparen .)
+    $end            reduce using rule 13 (expression -> lparen expression rparen .)
+    rparen          reduce using rule 13 (expression -> lparen expression rparen .)
+    comma           reduce using rule 13 (expression -> lparen expression rparen .)
 
-    expression                     shift and go to state 23
 
 state 23
 
-    (15) expression_list -> expression_list COMMA expression .
-    (11) expression -> expression . OPERATOR expression
+    (16) expression_list -> expression_list comma . expression
+    (8) expression -> . integer
+    (9) expression -> . float
+    (10) expression -> . string
+    (11) expression -> . identifier
+    (12) expression -> . expression operator expression
+    (13) expression -> . lparen expression rparen
 
-    COMMA           reduce using rule 15 (expression_list -> expression_list COMMA expression .)
-    IDENTIFIER      reduce using rule 15 (expression_list -> expression_list COMMA expression .)
-    NUMBER          reduce using rule 15 (expression_list -> expression_list COMMA expression .)
-    STRING          reduce using rule 15 (expression_list -> expression_list COMMA expression .)
-    LPAREN          reduce using rule 15 (expression_list -> expression_list COMMA expression .)
-    PRINT           reduce using rule 15 (expression_list -> expression_list COMMA expression .)
-    $end            reduce using rule 15 (expression_list -> expression_list COMMA expression .)
-    OPERATOR        shift and go to state 13
+    integer         shift and go to state 8
+    float           shift and go to state 9
+    string          shift and go to state 10
+    identifier      shift and go to state 17
+    lparen          shift and go to state 11
+
+    expression                     shift and go to state 24
+
+state 24
+
+    (16) expression_list -> expression_list comma expression .
+    (12) expression -> expression . operator expression
+
+    comma           reduce using rule 16 (expression_list -> expression_list comma expression .)
+    identifier      reduce using rule 16 (expression_list -> expression_list comma expression .)
+    integer         reduce using rule 16 (expression_list -> expression_list comma expression .)
+    float           reduce using rule 16 (expression_list -> expression_list comma expression .)
+    string          reduce using rule 16 (expression_list -> expression_list comma expression .)
+    lparen          reduce using rule 16 (expression_list -> expression_list comma expression .)
+    print           reduce using rule 16 (expression_list -> expression_list comma expression .)
+    $end            reduce using rule 16 (expression_list -> expression_list comma expression .)
+    operator        shift and go to state 14
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for OPERATOR in state 19 resolved as shift
+WARNING: shift/reduce conflict for operator in state 20 resolved as shift

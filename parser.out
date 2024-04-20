@@ -1,603 +1,123 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    ADD
+    ADDRESS
+    ADDRESS_LITERAL
+    BOOL
+    COMMA
+    CONTRACT
+    DIVIDE
+    EMIT
+    EQUIVALENT
+    EVENT
+    EXTERNAL
+    FUNCTION
+    GREATERTHAN
+    GREATERTHANOREQUAL
+    INT
+    INTERNAL
+    LESSTHAN
+    LESSTHANOREQUAL
+    MULTIPLY
+    NOTEQUAL
+    NUMBER
+    PRINT
+    PRIVATE
+    PUBLIC
+    RETURN
+    RETURNS
+    STRING
+    STRING_LITERAL
+    SUBTRACT
+    TYPE_SPECIFIER
+    VISIBILITY
+
 Grammar
 
 Rule 0     S' -> program
 Rule 1     program -> statement_list
-Rule 2     statement_list -> statement
-Rule 3     statement_list -> statement_list statement
+Rule 2     statement_list -> statement statement_list
+Rule 3     statement_list -> statement
 Rule 4     statement -> assignment
-Rule 5     statement -> comparison
-Rule 6     statement -> expression
-Rule 7     statement -> print_statement
-Rule 8     assignment -> identifier equals expression
-Rule 9     comparison -> identifier double_equals expression
-Rule 10    expression -> integer
-Rule 11    expression -> float
-Rule 12    expression -> string
-Rule 13    expression -> identifier
-Rule 14    expression -> expression operator expression
-Rule 15    expression -> expression double_equals expression
-Rule 16    expression -> lparen expression rparen
-Rule 17    print_statement -> print expression_list
-Rule 18    expression_list -> expression
-Rule 19    expression_list -> expression_list comma expression
+Rule 5     statement -> if_statement
+Rule 6     statement -> loop
+Rule 7     statement -> display
+Rule 8     statement -> return_statement
+Rule 9     statement -> contract_declaration
+Rule 10    assignment -> VAR IDENTIFIER EQUAL expression SEMICOLON
+Rule 11    assignment -> IDENTIFIER EQUAL expression SEMICOLON
+Rule 12    if_statement -> IF OPENPAREN condition CLOSEPAREN THEN CURLYOPENINGPAREN statement_list CURLYCLOSINGPAREN ELSE CURLYOPENINGPAREN statement_list CURLYCLOSINGPAREN END
+Rule 13    if_statement -> IF OPENPAREN condition CLOSEPAREN THEN CURLYOPENINGPAREN statement_list CURLYCLOSINGPAREN END
+Rule 14    loop -> for_loop
+Rule 15    loop -> while_loop
+Rule 16    for_loop -> FOR OPENPAREN assignment condition SEMICOLON assignment CLOSEPAREN DO CURLYOPENINGPAREN statement_list CURLYCLOSINGPAREN END
+Rule 17    while_loop -> WHILE OPENPAREN condition CLOSEPAREN DO CURLYOPENINGPAREN statement_list CURLYCLOSINGPAREN END
 
 Terminals, with rules where they appear
 
-comma                : 19
-double_equals        : 9 15
-equals               : 8
+ADD                  : 
+ADDRESS              : 
+ADDRESS_LITERAL      : 
+BOOL                 : 
+CLOSEPAREN           : 12 13 16 17
+COMMA                : 
+CONTRACT             : 
+CURLYCLOSINGPAREN    : 12 12 13 16 17
+CURLYOPENINGPAREN    : 12 12 13 16 17
+DIVIDE               : 
+DO                   : 16 17
+ELSE                 : 12
+EMIT                 : 
+END                  : 12 13 16 17
+EQUAL                : 10 11
+EQUIVALENT           : 
+EVENT                : 
+EXTERNAL             : 
+FOR                  : 16
+FUNCTION             : 
+GREATERTHAN          : 
+GREATERTHANOREQUAL   : 
+IDENTIFIER           : 10 11
+IF                   : 12 13
+INT                  : 
+INTERNAL             : 
+LESSTHAN             : 
+LESSTHANOREQUAL      : 
+MULTIPLY             : 
+NOTEQUAL             : 
+NUMBER               : 
+OPENPAREN            : 12 13 16 17
+PRINT                : 
+PRIVATE              : 
+PUBLIC               : 
+RETURN               : 
+RETURNS              : 
+SEMICOLON            : 10 11 16
+STRING               : 
+STRING_LITERAL       : 
+SUBTRACT             : 
+THEN                 : 12 13
+TYPE_SPECIFIER       : 
+VAR                  : 10
+VISIBILITY           : 
+WHILE                : 17
 error                : 
-float                : 11
-identifier           : 8 9 13
-integer              : 10
-lparen               : 16
-operator             : 14
-print                : 17
-rparen               : 16
-string               : 12
 
 Nonterminals, with rules where they appear
 
-assignment           : 4
-comparison           : 5
-expression           : 6 8 9 14 14 15 15 16 18 19
-expression_list      : 17 19
-print_statement      : 7
+assignment           : 4 16 16
+condition            : 12 13 16 17
+contract_declaration : 9
+display              : 7
+expression           : 10 11
+for_loop             : 14
+if_statement         : 5
+loop                 : 6
 program              : 0
+return_statement     : 8
 statement            : 2 3
-statement_list       : 1 3
+statement_list       : 1 2 12 12 13 16 17
+while_loop           : 15
 
-Parsing method: LALR
-
-state 0
-
-    (0) S' -> . program
-    (1) program -> . statement_list
-    (2) statement_list -> . statement
-    (3) statement_list -> . statement_list statement
-    (4) statement -> . assignment
-    (5) statement -> . comparison
-    (6) statement -> . expression
-    (7) statement -> . print_statement
-    (8) assignment -> . identifier equals expression
-    (9) comparison -> . identifier double_equals expression
-    (10) expression -> . integer
-    (11) expression -> . float
-    (12) expression -> . string
-    (13) expression -> . identifier
-    (14) expression -> . expression operator expression
-    (15) expression -> . expression double_equals expression
-    (16) expression -> . lparen expression rparen
-    (17) print_statement -> . print expression_list
-
-    identifier      shift and go to state 8
-    integer         shift and go to state 9
-    float           shift and go to state 10
-    string          shift and go to state 11
-    lparen          shift and go to state 12
-    print           shift and go to state 13
-
-    program                        shift and go to state 1
-    statement_list                 shift and go to state 2
-    statement                      shift and go to state 3
-    assignment                     shift and go to state 4
-    comparison                     shift and go to state 5
-    expression                     shift and go to state 6
-    print_statement                shift and go to state 7
-
-state 1
-
-    (0) S' -> program .
-
-
-
-state 2
-
-    (1) program -> statement_list .
-    (3) statement_list -> statement_list . statement
-    (4) statement -> . assignment
-    (5) statement -> . comparison
-    (6) statement -> . expression
-    (7) statement -> . print_statement
-    (8) assignment -> . identifier equals expression
-    (9) comparison -> . identifier double_equals expression
-    (10) expression -> . integer
-    (11) expression -> . float
-    (12) expression -> . string
-    (13) expression -> . identifier
-    (14) expression -> . expression operator expression
-    (15) expression -> . expression double_equals expression
-    (16) expression -> . lparen expression rparen
-    (17) print_statement -> . print expression_list
-
-    $end            reduce using rule 1 (program -> statement_list .)
-    identifier      shift and go to state 8
-    integer         shift and go to state 9
-    float           shift and go to state 10
-    string          shift and go to state 11
-    lparen          shift and go to state 12
-    print           shift and go to state 13
-
-    statement                      shift and go to state 14
-    assignment                     shift and go to state 4
-    comparison                     shift and go to state 5
-    expression                     shift and go to state 6
-    print_statement                shift and go to state 7
-
-state 3
-
-    (2) statement_list -> statement .
-
-    identifier      reduce using rule 2 (statement_list -> statement .)
-    integer         reduce using rule 2 (statement_list -> statement .)
-    float           reduce using rule 2 (statement_list -> statement .)
-    string          reduce using rule 2 (statement_list -> statement .)
-    lparen          reduce using rule 2 (statement_list -> statement .)
-    print           reduce using rule 2 (statement_list -> statement .)
-    $end            reduce using rule 2 (statement_list -> statement .)
-
-
-state 4
-
-    (4) statement -> assignment .
-
-    identifier      reduce using rule 4 (statement -> assignment .)
-    integer         reduce using rule 4 (statement -> assignment .)
-    float           reduce using rule 4 (statement -> assignment .)
-    string          reduce using rule 4 (statement -> assignment .)
-    lparen          reduce using rule 4 (statement -> assignment .)
-    print           reduce using rule 4 (statement -> assignment .)
-    $end            reduce using rule 4 (statement -> assignment .)
-
-
-state 5
-
-    (5) statement -> comparison .
-
-    identifier      reduce using rule 5 (statement -> comparison .)
-    integer         reduce using rule 5 (statement -> comparison .)
-    float           reduce using rule 5 (statement -> comparison .)
-    string          reduce using rule 5 (statement -> comparison .)
-    lparen          reduce using rule 5 (statement -> comparison .)
-    print           reduce using rule 5 (statement -> comparison .)
-    $end            reduce using rule 5 (statement -> comparison .)
-
-
-state 6
-
-    (6) statement -> expression .
-    (14) expression -> expression . operator expression
-    (15) expression -> expression . double_equals expression
-
-    identifier      reduce using rule 6 (statement -> expression .)
-    integer         reduce using rule 6 (statement -> expression .)
-    float           reduce using rule 6 (statement -> expression .)
-    string          reduce using rule 6 (statement -> expression .)
-    lparen          reduce using rule 6 (statement -> expression .)
-    print           reduce using rule 6 (statement -> expression .)
-    $end            reduce using rule 6 (statement -> expression .)
-    operator        shift and go to state 15
-    double_equals   shift and go to state 16
-
-
-state 7
-
-    (7) statement -> print_statement .
-
-    identifier      reduce using rule 7 (statement -> print_statement .)
-    integer         reduce using rule 7 (statement -> print_statement .)
-    float           reduce using rule 7 (statement -> print_statement .)
-    string          reduce using rule 7 (statement -> print_statement .)
-    lparen          reduce using rule 7 (statement -> print_statement .)
-    print           reduce using rule 7 (statement -> print_statement .)
-    $end            reduce using rule 7 (statement -> print_statement .)
-
-
-state 8
-
-    (8) assignment -> identifier . equals expression
-    (9) comparison -> identifier . double_equals expression
-    (13) expression -> identifier .
-
-  ! shift/reduce conflict for double_equals resolved as shift
-    equals          shift and go to state 17
-    double_equals   shift and go to state 18
-    operator        reduce using rule 13 (expression -> identifier .)
-    identifier      reduce using rule 13 (expression -> identifier .)
-    integer         reduce using rule 13 (expression -> identifier .)
-    float           reduce using rule 13 (expression -> identifier .)
-    string          reduce using rule 13 (expression -> identifier .)
-    lparen          reduce using rule 13 (expression -> identifier .)
-    print           reduce using rule 13 (expression -> identifier .)
-    $end            reduce using rule 13 (expression -> identifier .)
-
-  ! double_equals   [ reduce using rule 13 (expression -> identifier .) ]
-
-
-state 9
-
-    (10) expression -> integer .
-
-    operator        reduce using rule 10 (expression -> integer .)
-    double_equals   reduce using rule 10 (expression -> integer .)
-    identifier      reduce using rule 10 (expression -> integer .)
-    integer         reduce using rule 10 (expression -> integer .)
-    float           reduce using rule 10 (expression -> integer .)
-    string          reduce using rule 10 (expression -> integer .)
-    lparen          reduce using rule 10 (expression -> integer .)
-    print           reduce using rule 10 (expression -> integer .)
-    $end            reduce using rule 10 (expression -> integer .)
-    rparen          reduce using rule 10 (expression -> integer .)
-    comma           reduce using rule 10 (expression -> integer .)
-
-
-state 10
-
-    (11) expression -> float .
-
-    operator        reduce using rule 11 (expression -> float .)
-    double_equals   reduce using rule 11 (expression -> float .)
-    identifier      reduce using rule 11 (expression -> float .)
-    integer         reduce using rule 11 (expression -> float .)
-    float           reduce using rule 11 (expression -> float .)
-    string          reduce using rule 11 (expression -> float .)
-    lparen          reduce using rule 11 (expression -> float .)
-    print           reduce using rule 11 (expression -> float .)
-    $end            reduce using rule 11 (expression -> float .)
-    rparen          reduce using rule 11 (expression -> float .)
-    comma           reduce using rule 11 (expression -> float .)
-
-
-state 11
-
-    (12) expression -> string .
-
-    operator        reduce using rule 12 (expression -> string .)
-    double_equals   reduce using rule 12 (expression -> string .)
-    identifier      reduce using rule 12 (expression -> string .)
-    integer         reduce using rule 12 (expression -> string .)
-    float           reduce using rule 12 (expression -> string .)
-    string          reduce using rule 12 (expression -> string .)
-    lparen          reduce using rule 12 (expression -> string .)
-    print           reduce using rule 12 (expression -> string .)
-    $end            reduce using rule 12 (expression -> string .)
-    rparen          reduce using rule 12 (expression -> string .)
-    comma           reduce using rule 12 (expression -> string .)
-
-
-state 12
-
-    (16) expression -> lparen . expression rparen
-    (10) expression -> . integer
-    (11) expression -> . float
-    (12) expression -> . string
-    (13) expression -> . identifier
-    (14) expression -> . expression operator expression
-    (15) expression -> . expression double_equals expression
-    (16) expression -> . lparen expression rparen
-
-    integer         shift and go to state 9
-    float           shift and go to state 10
-    string          shift and go to state 11
-    identifier      shift and go to state 20
-    lparen          shift and go to state 12
-
-    expression                     shift and go to state 19
-
-state 13
-
-    (17) print_statement -> print . expression_list
-    (18) expression_list -> . expression
-    (19) expression_list -> . expression_list comma expression
-    (10) expression -> . integer
-    (11) expression -> . float
-    (12) expression -> . string
-    (13) expression -> . identifier
-    (14) expression -> . expression operator expression
-    (15) expression -> . expression double_equals expression
-    (16) expression -> . lparen expression rparen
-
-    integer         shift and go to state 9
-    float           shift and go to state 10
-    string          shift and go to state 11
-    identifier      shift and go to state 20
-    lparen          shift and go to state 12
-
-    expression_list                shift and go to state 21
-    expression                     shift and go to state 22
-
-state 14
-
-    (3) statement_list -> statement_list statement .
-
-    identifier      reduce using rule 3 (statement_list -> statement_list statement .)
-    integer         reduce using rule 3 (statement_list -> statement_list statement .)
-    float           reduce using rule 3 (statement_list -> statement_list statement .)
-    string          reduce using rule 3 (statement_list -> statement_list statement .)
-    lparen          reduce using rule 3 (statement_list -> statement_list statement .)
-    print           reduce using rule 3 (statement_list -> statement_list statement .)
-    $end            reduce using rule 3 (statement_list -> statement_list statement .)
-
-
-state 15
-
-    (14) expression -> expression operator . expression
-    (10) expression -> . integer
-    (11) expression -> . float
-    (12) expression -> . string
-    (13) expression -> . identifier
-    (14) expression -> . expression operator expression
-    (15) expression -> . expression double_equals expression
-    (16) expression -> . lparen expression rparen
-
-    integer         shift and go to state 9
-    float           shift and go to state 10
-    string          shift and go to state 11
-    identifier      shift and go to state 20
-    lparen          shift and go to state 12
-
-    expression                     shift and go to state 23
-
-state 16
-
-    (15) expression -> expression double_equals . expression
-    (10) expression -> . integer
-    (11) expression -> . float
-    (12) expression -> . string
-    (13) expression -> . identifier
-    (14) expression -> . expression operator expression
-    (15) expression -> . expression double_equals expression
-    (16) expression -> . lparen expression rparen
-
-    integer         shift and go to state 9
-    float           shift and go to state 10
-    string          shift and go to state 11
-    identifier      shift and go to state 20
-    lparen          shift and go to state 12
-
-    expression                     shift and go to state 24
-
-state 17
-
-    (8) assignment -> identifier equals . expression
-    (10) expression -> . integer
-    (11) expression -> . float
-    (12) expression -> . string
-    (13) expression -> . identifier
-    (14) expression -> . expression operator expression
-    (15) expression -> . expression double_equals expression
-    (16) expression -> . lparen expression rparen
-
-    integer         shift and go to state 9
-    float           shift and go to state 10
-    string          shift and go to state 11
-    identifier      shift and go to state 20
-    lparen          shift and go to state 12
-
-    expression                     shift and go to state 25
-
-state 18
-
-    (9) comparison -> identifier double_equals . expression
-    (10) expression -> . integer
-    (11) expression -> . float
-    (12) expression -> . string
-    (13) expression -> . identifier
-    (14) expression -> . expression operator expression
-    (15) expression -> . expression double_equals expression
-    (16) expression -> . lparen expression rparen
-
-    integer         shift and go to state 9
-    float           shift and go to state 10
-    string          shift and go to state 11
-    identifier      shift and go to state 20
-    lparen          shift and go to state 12
-
-    expression                     shift and go to state 26
-
-state 19
-
-    (16) expression -> lparen expression . rparen
-    (14) expression -> expression . operator expression
-    (15) expression -> expression . double_equals expression
-
-    rparen          shift and go to state 27
-    operator        shift and go to state 15
-    double_equals   shift and go to state 16
-
-
-state 20
-
-    (13) expression -> identifier .
-
-    rparen          reduce using rule 13 (expression -> identifier .)
-    operator        reduce using rule 13 (expression -> identifier .)
-    double_equals   reduce using rule 13 (expression -> identifier .)
-    comma           reduce using rule 13 (expression -> identifier .)
-    identifier      reduce using rule 13 (expression -> identifier .)
-    integer         reduce using rule 13 (expression -> identifier .)
-    float           reduce using rule 13 (expression -> identifier .)
-    string          reduce using rule 13 (expression -> identifier .)
-    lparen          reduce using rule 13 (expression -> identifier .)
-    print           reduce using rule 13 (expression -> identifier .)
-    $end            reduce using rule 13 (expression -> identifier .)
-
-
-state 21
-
-    (17) print_statement -> print expression_list .
-    (19) expression_list -> expression_list . comma expression
-
-    identifier      reduce using rule 17 (print_statement -> print expression_list .)
-    integer         reduce using rule 17 (print_statement -> print expression_list .)
-    float           reduce using rule 17 (print_statement -> print expression_list .)
-    string          reduce using rule 17 (print_statement -> print expression_list .)
-    lparen          reduce using rule 17 (print_statement -> print expression_list .)
-    print           reduce using rule 17 (print_statement -> print expression_list .)
-    $end            reduce using rule 17 (print_statement -> print expression_list .)
-    comma           shift and go to state 28
-
-
-state 22
-
-    (18) expression_list -> expression .
-    (14) expression -> expression . operator expression
-    (15) expression -> expression . double_equals expression
-
-    comma           reduce using rule 18 (expression_list -> expression .)
-    identifier      reduce using rule 18 (expression_list -> expression .)
-    integer         reduce using rule 18 (expression_list -> expression .)
-    float           reduce using rule 18 (expression_list -> expression .)
-    string          reduce using rule 18 (expression_list -> expression .)
-    lparen          reduce using rule 18 (expression_list -> expression .)
-    print           reduce using rule 18 (expression_list -> expression .)
-    $end            reduce using rule 18 (expression_list -> expression .)
-    operator        shift and go to state 15
-    double_equals   shift and go to state 16
-
-
-state 23
-
-    (14) expression -> expression operator expression .
-    (14) expression -> expression . operator expression
-    (15) expression -> expression . double_equals expression
-
-  ! shift/reduce conflict for operator resolved as shift
-  ! shift/reduce conflict for double_equals resolved as shift
-    identifier      reduce using rule 14 (expression -> expression operator expression .)
-    integer         reduce using rule 14 (expression -> expression operator expression .)
-    float           reduce using rule 14 (expression -> expression operator expression .)
-    string          reduce using rule 14 (expression -> expression operator expression .)
-    lparen          reduce using rule 14 (expression -> expression operator expression .)
-    print           reduce using rule 14 (expression -> expression operator expression .)
-    $end            reduce using rule 14 (expression -> expression operator expression .)
-    rparen          reduce using rule 14 (expression -> expression operator expression .)
-    comma           reduce using rule 14 (expression -> expression operator expression .)
-    operator        shift and go to state 15
-    double_equals   shift and go to state 16
-
-  ! operator        [ reduce using rule 14 (expression -> expression operator expression .) ]
-  ! double_equals   [ reduce using rule 14 (expression -> expression operator expression .) ]
-
-
-state 24
-
-    (15) expression -> expression double_equals expression .
-    (14) expression -> expression . operator expression
-    (15) expression -> expression . double_equals expression
-
-  ! shift/reduce conflict for operator resolved as shift
-  ! shift/reduce conflict for double_equals resolved as shift
-    identifier      reduce using rule 15 (expression -> expression double_equals expression .)
-    integer         reduce using rule 15 (expression -> expression double_equals expression .)
-    float           reduce using rule 15 (expression -> expression double_equals expression .)
-    string          reduce using rule 15 (expression -> expression double_equals expression .)
-    lparen          reduce using rule 15 (expression -> expression double_equals expression .)
-    print           reduce using rule 15 (expression -> expression double_equals expression .)
-    $end            reduce using rule 15 (expression -> expression double_equals expression .)
-    rparen          reduce using rule 15 (expression -> expression double_equals expression .)
-    comma           reduce using rule 15 (expression -> expression double_equals expression .)
-    operator        shift and go to state 15
-    double_equals   shift and go to state 16
-
-  ! operator        [ reduce using rule 15 (expression -> expression double_equals expression .) ]
-  ! double_equals   [ reduce using rule 15 (expression -> expression double_equals expression .) ]
-
-
-state 25
-
-    (8) assignment -> identifier equals expression .
-    (14) expression -> expression . operator expression
-    (15) expression -> expression . double_equals expression
-
-    identifier      reduce using rule 8 (assignment -> identifier equals expression .)
-    integer         reduce using rule 8 (assignment -> identifier equals expression .)
-    float           reduce using rule 8 (assignment -> identifier equals expression .)
-    string          reduce using rule 8 (assignment -> identifier equals expression .)
-    lparen          reduce using rule 8 (assignment -> identifier equals expression .)
-    print           reduce using rule 8 (assignment -> identifier equals expression .)
-    $end            reduce using rule 8 (assignment -> identifier equals expression .)
-    operator        shift and go to state 15
-    double_equals   shift and go to state 16
-
-
-state 26
-
-    (9) comparison -> identifier double_equals expression .
-    (14) expression -> expression . operator expression
-    (15) expression -> expression . double_equals expression
-
-    identifier      reduce using rule 9 (comparison -> identifier double_equals expression .)
-    integer         reduce using rule 9 (comparison -> identifier double_equals expression .)
-    float           reduce using rule 9 (comparison -> identifier double_equals expression .)
-    string          reduce using rule 9 (comparison -> identifier double_equals expression .)
-    lparen          reduce using rule 9 (comparison -> identifier double_equals expression .)
-    print           reduce using rule 9 (comparison -> identifier double_equals expression .)
-    $end            reduce using rule 9 (comparison -> identifier double_equals expression .)
-    operator        shift and go to state 15
-    double_equals   shift and go to state 16
-
-
-state 27
-
-    (16) expression -> lparen expression rparen .
-
-    operator        reduce using rule 16 (expression -> lparen expression rparen .)
-    double_equals   reduce using rule 16 (expression -> lparen expression rparen .)
-    identifier      reduce using rule 16 (expression -> lparen expression rparen .)
-    integer         reduce using rule 16 (expression -> lparen expression rparen .)
-    float           reduce using rule 16 (expression -> lparen expression rparen .)
-    string          reduce using rule 16 (expression -> lparen expression rparen .)
-    lparen          reduce using rule 16 (expression -> lparen expression rparen .)
-    print           reduce using rule 16 (expression -> lparen expression rparen .)
-    $end            reduce using rule 16 (expression -> lparen expression rparen .)
-    rparen          reduce using rule 16 (expression -> lparen expression rparen .)
-    comma           reduce using rule 16 (expression -> lparen expression rparen .)
-
-
-state 28
-
-    (19) expression_list -> expression_list comma . expression
-    (10) expression -> . integer
-    (11) expression -> . float
-    (12) expression -> . string
-    (13) expression -> . identifier
-    (14) expression -> . expression operator expression
-    (15) expression -> . expression double_equals expression
-    (16) expression -> . lparen expression rparen
-
-    integer         shift and go to state 9
-    float           shift and go to state 10
-    string          shift and go to state 11
-    identifier      shift and go to state 20
-    lparen          shift and go to state 12
-
-    expression                     shift and go to state 29
-
-state 29
-
-    (19) expression_list -> expression_list comma expression .
-    (14) expression -> expression . operator expression
-    (15) expression -> expression . double_equals expression
-
-    comma           reduce using rule 19 (expression_list -> expression_list comma expression .)
-    identifier      reduce using rule 19 (expression_list -> expression_list comma expression .)
-    integer         reduce using rule 19 (expression_list -> expression_list comma expression .)
-    float           reduce using rule 19 (expression_list -> expression_list comma expression .)
-    string          reduce using rule 19 (expression_list -> expression_list comma expression .)
-    lparen          reduce using rule 19 (expression_list -> expression_list comma expression .)
-    print           reduce using rule 19 (expression_list -> expression_list comma expression .)
-    $end            reduce using rule 19 (expression_list -> expression_list comma expression .)
-    operator        shift and go to state 15
-    double_equals   shift and go to state 16
-
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for double_equals in state 8 resolved as shift
-WARNING: shift/reduce conflict for operator in state 23 resolved as shift
-WARNING: shift/reduce conflict for double_equals in state 23 resolved as shift
-WARNING: shift/reduce conflict for operator in state 24 resolved as shift
-WARNING: shift/reduce conflict for double_equals in state 24 resolved as shift
